@@ -1236,13 +1236,13 @@ void TestInstructions::testImmediates()
 void TestInstructions::testSIMDVector()
 {
     SIMDVector v{};
-    TEST_ASSERT(v.isAllSame())
+    TEST_ASSERT(!v.getAllSame())
     v = SIMDVector{Literal{42}};
-    TEST_ASSERT(v.isAllSame())
+    TEST_ASSERT_EQUALS(Literal{42}, v.getAllSame())
     v[7] = UNDEFINED_LITERAL;
-    TEST_ASSERT(v.isAllSame())
+    TEST_ASSERT_EQUALS(Literal{42}, v.getAllSame())
     v[8] = Literal{13};
-    TEST_ASSERT(!v.isAllSame())
+    TEST_ASSERT(!v.getAllSame())
 
     v = ELEMENT_NUMBERS.vector();
     TEST_ASSERT(v.isElementNumber(false, false, false))
